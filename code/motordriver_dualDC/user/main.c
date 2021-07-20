@@ -4,14 +4,10 @@
 #include "sys_tim.h"
 #include "wdt.h"
 //-------------hardware----------------------
-#include "led.h"
-#include "adc.h"
-//-------------UART---------------------
-//#include "uart.h"
-#include "motor.h"
-#include "ppm.h"
-
 #include "uart1.h"
+
+#include "motordriver.h"
+
 #include "display.h"
 
 bit BIT_TMP;
@@ -29,8 +25,8 @@ void main (void)
 	//WDT_Stop();
 	led_init();						//LED
 	ADC_Config();
-	Motor_Init();
-    ppm_init();
+    display_init();
+    motordriver_init();
 	All_interrupt_ON();
     
 	printf("\nSystem start...\n");
@@ -38,49 +34,21 @@ void main (void)
 	{
 		//主循环
 		WDT_Clear();
-		Read_ADC();				//循环采样
-		Get_ADCValue();			//数据转换
+		Read_ADC();
+		Get_ADCValue();
 		systick_Handler();
 		if(F_sys_tim_1ms)
 		{
 			F_sys_tim_1ms = 0;
-            display_handler();
-            ppm_handler();
-            
-			//简易1ms时间调度
             adc_handler();
-#if 1
-//			set_speed_Motor1(voltage_Vin/4);
-//			set_speed_Motor2(voltage_Vin/4);
-			set_speed_Motor1(((int16_t)voltage_Vin) - 2048);
-			set_speed_Motor2(((int16_t)voltage_Vin) - 2048);
-#else
-                set_speed_Motor1(ppm_in[0].result/16-1000);
-                set_speed_Motor2(ppm_in[0].result/16-1000);
-//            if(ppm_in[0].errors)
-//            {
-//                set_speed_Motor1(0);
-//                set_speed_Motor2(0);
-//            }
-//            else
-//            {
-//                
-//            }
-#endif
+            display_handler();
+            motordriver_handler();
 			
 		}
 		if(F_sys_tim_100ms)
 		{
 			F_sys_tim_100ms = 0;
-			//
             
-            
-            st7032_i2c_setCursor(0,0);
-            sprintf(char_buf, "PPM:%04U ",ppm_in[0].result);
-            st7032_i2c_write_str(char_buf);
-            st7032_i2c_setCursor(1,0);
-            sprintf(char_buf, "AIN:%04U ",voltage_Vin);
-            st7032_i2c_write_str(char_buf);
 		}
 		if(F_sys_tim_1s)
 		{

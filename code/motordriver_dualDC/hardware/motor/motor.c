@@ -25,46 +25,46 @@ void PWM_DEAD_TIME_VALUE(UINT16	DeadTimeData)
 }
 */
 
-void  setDIR_Motor1(MotorDIR direction)
+void  setDIR_motor1(motorDIR direction)
 {
   if(direction == DIR_forward)
   {
-	IDIR_Motor1_ON();
-	DIR_Motor1_OFF();
+	IDIR_motor1_ON();
+	DIR_motor1_OFF();
   }
   else if(direction == DIR_back)
   {
-	DIR_Motor1_ON();
-	IDIR_Motor1_OFF();
+	DIR_motor1_ON();
+	IDIR_motor1_OFF();
   }
   else
   {
-	DIR_Motor1_OFF();
-	IDIR_Motor1_OFF();
+	DIR_motor1_OFF();
+	IDIR_motor1_OFF();
   }
   
 }
 
-void  setDIR_Motor2(MotorDIR direction)
+void  setDIR_motor2(motorDIR direction)
 {
   if(direction == DIR_forward)
   {
-	IDIR_Motor2_ON();
-	DIR_Motor2_OFF();
+	IDIR_motor2_ON();
+	DIR_motor2_OFF();
   }
   else if(direction == DIR_back)
   {
-	DIR_Motor2_ON();
-	IDIR_Motor2_OFF();
+	DIR_motor2_ON();
+	IDIR_motor2_OFF();
   }
   else
   {
-	DIR_Motor2_OFF();
-	IDIR_Motor2_OFF();
+	DIR_motor2_OFF();
+	IDIR_motor2_OFF();
   }
   
 }
-void	set_speed_Motor1(int16_t speed_motor)
+void	set_speed_motor1(int16_t speed_motor)
 {
   if(speed_motor > Period_PWM)
 	speed_motor = Period_PWM;
@@ -72,38 +72,38 @@ void	set_speed_Motor1(int16_t speed_motor)
 	speed_motor = -Period_PWM;
   
   
-  if(speed_motor > PWM_MOTOR_MIN)
+  if(speed_motor > PWM_motor_MIN)
   {
 	
-	setDIR_Motor1(DIR_forward);
-	set_PWM_Motor1(speed_motor);
+	setDIR_motor1(DIR_forward);
+	set_PWM_motor1(speed_motor);
 	//TIM1_SetCompare1(speed_motor);
-	//PWM_Motor1_ON();
-	 // IPWM_Motor1_OFF();
+	//PWM_motor1_ON();
+	 // IPWM_motor1_OFF();
 	  
   }
-  else if(speed_motor < -PWM_MOTOR_MIN)
+  else if(speed_motor < -PWM_motor_MIN)
   {
 	
-	setDIR_Motor1(DIR_back);
+	setDIR_motor1(DIR_back);
 	//TIM1_SetCompare1(Period_PWM + speed_motor);
-	  set_PWM_Motor1(Period_PWM + speed_motor);
-	 // PWM_Motor1_OFF();
-	 // IPWM_Motor1_ON();
+	  set_PWM_motor1(Period_PWM + speed_motor);
+	 // PWM_motor1_OFF();
+	 // IPWM_motor1_ON();
   }
   else
   {
-	setDIR_Motor1(DIR_standby);
-	  set_PWM_Motor1(0);
+	setDIR_motor1(DIR_standby);
+	  set_PWM_motor1(0);
 	//TIM1_SetCompare1(0);
-	//PWM_Motor1_OFF();
-	 // IPWM_Motor1_OFF();
+	//PWM_motor1_OFF();
+	 // IPWM_motor1_OFF();
   }
 }
 
 
 
-void set_speed_Motor2(int16_t speed_motor)
+void set_speed_motor2(int16_t speed_motor)
 {
   if(speed_motor > Period_PWM)
 	speed_motor = Period_PWM;
@@ -111,42 +111,42 @@ void set_speed_Motor2(int16_t speed_motor)
 	speed_motor = -Period_PWM;
   
   
-  if(speed_motor > PWM_MOTOR_MIN)
+  if(speed_motor > PWM_motor_MIN)
   {
 	
-	setDIR_Motor2(DIR_forward);
+	setDIR_motor2(DIR_forward);
 	//TIM1_SetCompare1(speed_motor);
-	 set_PWM_Motor2(speed_motor);
-	//PWM_Motor2_ON();
-	//IPWM_Motor2_OFF();
+	 set_PWM_motor2(speed_motor);
+	//PWM_motor2_ON();
+	//IPWM_motor2_OFF();
 	  
   }
-  else if(speed_motor < -PWM_MOTOR_MIN)
+  else if(speed_motor < -PWM_motor_MIN)
   {
 	
-	setDIR_Motor2(DIR_back);
+	setDIR_motor2(DIR_back);
 	//TIM1_SetCompare1(Period_PWM + speed_motor);
-	  set_PWM_Motor2(Period_PWM + speed_motor);
-	  //PWM_Motor2_OFF();
-	  //IPWM_Motor2_ON();
+	  set_PWM_motor2(Period_PWM + speed_motor);
+	  //PWM_motor2_OFF();
+	  //IPWM_motor2_ON();
   }
   else
   {
-	setDIR_Motor2(DIR_standby);
-	  set_PWM_Motor2(0);
+	setDIR_motor2(DIR_standby);
+	  set_PWM_motor2(0);
 	//TIM1_SetCompare1(0);
-	//PWM_Motor2_OFF();
-	  //IPWM_Motor2_OFF();
+	//PWM_motor2_OFF();
+	  //IPWM_motor2_OFF();
   }
 }
 
-void set_PWM_Motor1(uint16_t pwm_motor)
+void set_PWM_motor1(uint16_t pwm_motor)
 {
 	PWM0H = pwm_motor/256;
 	PWM0L = pwm_motor%256;
 	set_LOAD;
 }
-void set_PWM_Motor2(uint16_t pwm_motor)
+void set_PWM_motor2(uint16_t pwm_motor)
 {
 	set_SFRPAGE;										// PWM4 and PWM5 duty value need set SFPPAGE 1
 	PWM4H = pwm_motor/256;
@@ -179,7 +179,7 @@ void pwm_Init(void )
 	
 	PWM01_DEADTIME_ENABLE;
 	PWM45_DEADTIME_ENABLE;
-	PWM_DEAD_TIME_VALUE(MOTOR_DEADTM);			//value never over 0x1FF
+	PWM_DEAD_TIME_VALUE(motor_DEADTM);			//value never over 0x1FF
 	PMEN = 0x00;		//ÑÚÂë¿ØÖÆ
 	PMD = 0x00;		//ÑÚÂë×´Ì¬Êä³öµçÆ½ÉèÖÃ
 	PNP = 0x11;		//0B00100010
@@ -187,27 +187,27 @@ void pwm_Init(void )
     set_LOAD;
     set_PWMRUN;
 }
-void Motor_Init(void)
+void motor_Init(void)
 {
-	DIR_Motor1_OFF();
-	DIR_Motor2_OFF();
-	IDIR_Motor1_OFF();
-	IDIR_Motor2_OFF();
+	DIR_motor1_OFF();
+	DIR_motor2_OFF();
+	IDIR_motor1_OFF();
+	IDIR_motor2_OFF();
 	
-	PWM_Motor1_OFF();
-	PWM_Motor2_OFF();
-	IPWM_Motor1_OFF();
-	IPWM_Motor2_OFF();
+	PWM_motor1_OFF();
+	PWM_motor2_OFF();
+	IPWM_motor1_OFF();
+	IPWM_motor2_OFF();
 	
-	DIR_Motor1_Output();
-	DIR_Motor2_Output();
-	IDIR_Motor1_Output();
-	IDIR_Motor2_Output();
+	DIR_motor1_Output();
+	DIR_motor2_Output();
+	IDIR_motor1_Output();
+	IDIR_motor2_Output();
 	
-	PWM_Motor1_Output();
-	PWM_Motor2_Output();
-	IPWM_Motor1_Output();
-	IPWM_Motor2_Output();
+	PWM_motor1_Output();
+	PWM_motor2_Output();
+	IPWM_motor1_Output();
+	IPWM_motor2_Output();
 	pwm_Init();
 	
 }	
