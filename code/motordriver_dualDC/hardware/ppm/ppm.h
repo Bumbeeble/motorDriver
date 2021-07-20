@@ -39,6 +39,7 @@ sbit pin_ppm_in1 = P0^6;
 
 extern xdata def_ppm ppm_in[PPM_CH_MAX];
 void ppm_init(void );
+void ppm_handler(void );
 
 #endif
 

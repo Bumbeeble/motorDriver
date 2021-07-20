@@ -112,6 +112,11 @@ void ppm_init(void )
     PIO_config();
 }
 
+void ppm_handler(void )
+{
+    
+}
+
 //-------------end-----------------
 
 

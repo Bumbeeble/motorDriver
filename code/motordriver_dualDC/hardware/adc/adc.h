@@ -69,6 +69,7 @@ void Get_ADCValue(void );
 void ADC_Cycle_Start(void );
 void READ_BANDGAP();
 
+void adc_handler(void );
 
 
 #endif

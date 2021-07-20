@@ -1,9 +1,6 @@
-#ifndef __sys_tim_H
-#define __sys_tim_H
-#include "N76E003.h"
-#include "Function_define.h"
-#include "Common.h"
-#include "SFR_Macro.h"
+#ifndef __sys_tim_H__
+#define __sys_tim_H__
+
 #include "define.h"
 #include "adc.h"
 
@@ -18,10 +15,10 @@
 #endif
 */
 
-extern xdata uint8_t sys_tim_Flag_1ms;
-extern xdata uint8_t sys_tim_Flag_250ms;
-extern xdata uint8_t sys_tim_Flag_100ms;
-extern xdata uint8_t sys_tim_Flag_1s;
+extern xdata uint8_t F_sys_tim_1ms;
+extern xdata uint8_t F_sys_tim_250ms;
+extern xdata uint8_t F_sys_tim_100ms;
+extern xdata uint8_t F_sys_tim_1s;
 
 
 extern bit F_LED_Blink;

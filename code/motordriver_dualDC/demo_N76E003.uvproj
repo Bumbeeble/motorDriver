@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>PWR_Trans_NU</TargetName>
+      <TargetName>motor_dualDC</TargetName>
       <ToolsetNumber>0x0</ToolsetNumber>
       <ToolsetName>MCS-51</ToolsetName>
       <TargetOption>
@@ -311,7 +311,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\Common;.\include;.\system;.\user;.\hardware\LED;.\hardware\adc;.\hardware\wdt;.\hardware\delay;.\hardware\sleep;.\hardware\uart1;.\hardware\halfduplex;.\hardware\motor;.\hardware\ppm;.\hardware;.\hardware\i2c_simu;.\hardware\st7032_i2c</IncludePath>
+              <IncludePath>.\Common;.\include;.\system;.\user;.\hardware\led;.\hardware\adc;.\hardware\wdt;.\hardware\delay;.\hardware\uart1;.\hardware\motor;.\hardware\ppm;.\hardware;.\hardware\i2c_simu;.\hardware\st7032_i2c;.\user\display;.\user\debug</IncludePath>
             </VariousControls>
           </C51>
           <Ax51>
@@ -374,11 +374,6 @@
           <GroupName>hardware</GroupName>
           <Files>
             <File>
-              <FileName>led.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\hardware\LED\led.c</FilePath>
-            </File>
-            <File>
               <FileName>wdt.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\hardware\wdt\wdt.c</FilePath>
@@ -399,9 +394,9 @@
               <FilePath>.\hardware\ppm\ppm.c</FilePath>
             </File>
             <File>
-              <FileName>motor.c</FileName>
+              <FileName>st7032_i2c.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\hardware\motor\motor.c</FilePath>
+              <FilePath>.\hardware\st7032_i2c\st7032_i2c.c</FilePath>
             </File>
             <File>
               <FileName>i2c_simu.c</FileName>
@@ -409,9 +404,14 @@
               <FilePath>.\hardware\i2c_simu\i2c_simu.c</FilePath>
             </File>
             <File>
-              <FileName>st7032_i2c.c</FileName>
+              <FileName>led.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\hardware\st7032_i2c\st7032_i2c.c</FilePath>
+              <FilePath>.\hardware\LED\led.c</FilePath>
+            </File>
+            <File>
+              <FileName>motor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\hardware\motor\motor.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -442,6 +442,13 @@
         </Group>
         <Group>
           <GroupName>Readme</GroupName>
+          <Files>
+            <File>
+              <FileName>README.md</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\README.md</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>startup</GroupName>
@@ -450,6 +457,26 @@
               <FileName>STARTUP.A51</FileName>
               <FileType>2</FileType>
               <FilePath>.\Startup\STARTUP.A51</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Display</GroupName>
+          <Files>
+            <File>
+              <FileName>display.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\user\display\display.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>debug</GroupName>
+          <Files>
+            <File>
+              <FileName>debug.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\user\debug\debug.c</FilePath>
             </File>
           </Files>
         </Group>

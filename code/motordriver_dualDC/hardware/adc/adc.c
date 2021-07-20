@@ -40,6 +40,8 @@ void ADC_Config(void)
 	AINDIDS = (0x01<<channel_LeftCur)| (0x01<<channel_RightCur)| (0x01<<channel_VinVol);//	channel_LeftCur | channel_RightCur | channel_RightCur;
 	ADCDLY = 0x00;			//ADCÑÓÊ±Æô¶¯
 	READ_BANDGAP();
+    
+	ADC_Cycle_Start();				//ADC
 }
 
 void ADC_SelectChannel(uint8_t adc_ch)
@@ -161,10 +163,9 @@ void Get_ADCValue(void )
 	
 }
 
+
 xdata uint16_t Bandgap_Value, Bandgap_Voltage;
-
 xdata uint8_t BandgapHigh,BandgapLow,BandgapMark;
-
 void READ_BANDGAP()
 {
 		uint16_t Bandgap_Voltage_Temp;
@@ -215,6 +216,16 @@ set_IAPEN;
 		clr_IAPEN;
 
 }
-	
+
+
+void adc_handler(void )
+{
+    
+    if(F_Ready_ADCData)
+    {
+        F_Ready_ADCData = 0;
+    }
+}
+
 
 

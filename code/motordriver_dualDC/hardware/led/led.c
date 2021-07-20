@@ -4,13 +4,11 @@
 */
 
 #include "led.h"
-#include "sys_tim.h"
-
-void LED_Init()
+void led_init(void )
 {
-	LED_0_OUT();
-	LED_0(1);
+	led0_config();
 }
+
 
 
 

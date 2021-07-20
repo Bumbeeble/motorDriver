@@ -8,8 +8,6 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-#include "uart1.h"
-
 #define DEBUG_UART1
 
 
@@ -29,8 +27,5 @@ typedef enum{false = 0, true = !false} bool;
 //sfr page get must used together; All interrupt will be disabled when switch to sfr page1, and recover when switch to sfr page 0
 #define set_SFRPAGE1()  do{BIT_TMP=EA;EA=0;TA=0xAA;TA=0x55;SFRS|=SET_BIT0;}while(0)//do{TA_write(SFRS, 0x01);All_interrupt_Recover();}while(0)    //
 #define set_SFRPAGE0()  do{EA=0;TA=0xAA;TA=0x55;SFRS&=~SET_BIT0;EA=BIT_TMP;}while(0)//do{All_interrupt_OFF();TA_write(SFRS, 0x00);}while(0)    //
-
-bool get_sys_restart(void );
-void set_sys_restart(void );
 
 #endif

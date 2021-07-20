@@ -1,15 +1,15 @@
 #include "sys_tim.h"
 #include "led.h"
 #include "adc.h"
-static xdata uint8_t sys_tim_CNT_1ms = 0;
-static xdata uint8_t sys_tim_CNT_250ms = 0;
-static xdata uint8_t sys_tim_CNT_100ms = 0;
-static xdata uint8_t sys_tim_CNT_1s = 0;
+static xdata uint8_t cnt_sys_tim_1ms = 0;
+static xdata uint8_t cnt_sys_tim_250ms = 0;
+static xdata uint8_t cnt_sys_tim_100ms = 0;
+static xdata uint8_t cnt_sys_tim_1s = 0;
 
-xdata uint8_t sys_tim_Flag_1ms = 0;
-xdata uint8_t sys_tim_Flag_250ms = 0;
-xdata uint8_t sys_tim_Flag_100ms = 0;
-xdata uint8_t sys_tim_Flag_1s = 0;
+xdata uint8_t F_sys_tim_1ms = 0;
+xdata uint8_t F_sys_tim_250ms = 0;
+xdata uint8_t F_sys_tim_100ms = 0;
+xdata uint8_t F_sys_tim_1s = 0;
 
 #define	C_TIM_LED_Blink	250
 static xdata uint8_t cnt_LED_Blink = 0;
@@ -23,7 +23,7 @@ void systick_Handler()
 	if(F_systick == 0)
 		return;
 	F_systick = 0;
-	sys_tim_Flag_1ms = 1;
+	F_sys_tim_1ms = 1;
 	//LED
 	cnt_LED_Blink++;
 	if(cnt_LED_Blink >= C_TIM_LED_Blink)
@@ -34,24 +34,24 @@ void systick_Handler()
 //	F_TIM_LEDRUN = 1;
 	F_TIM_ADCValue = 1;
 	
-	sys_tim_CNT_100ms++;
-	if(sys_tim_CNT_100ms >= 100)
+	cnt_sys_tim_100ms++;
+	if(cnt_sys_tim_100ms >= 100)
 	{
-		sys_tim_CNT_100ms = 0;
-		sys_tim_Flag_100ms = 1;
+		cnt_sys_tim_100ms = 0;
+		F_sys_tim_100ms = 1;
 	}
 	//-------------------------------------------------
-	sys_tim_CNT_250ms++;
-	if(sys_tim_CNT_250ms>=250)
+	cnt_sys_tim_250ms++;
+	if(cnt_sys_tim_250ms>=250)
 	{
-		sys_tim_CNT_250ms = 0;
-		sys_tim_Flag_250ms = 1;
+		cnt_sys_tim_250ms = 0;
+		F_sys_tim_250ms = 1;
 		//-----------------250ms-------------------------
-		sys_tim_CNT_1s++;
-		if(sys_tim_CNT_1s >= 4)
+		cnt_sys_tim_1s++;
+		if(cnt_sys_tim_1s >= 4)
 		{
-			sys_tim_CNT_1s = 0;
-			sys_tim_Flag_1s = 1;
+			cnt_sys_tim_1s = 0;
+			F_sys_tim_1s = 1;
 		}
 
 	}
